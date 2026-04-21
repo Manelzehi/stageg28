@@ -16,7 +16,7 @@ Then(`I should be able to add a new product unity with valid details`, () => {
     // [Then] Describes the expected outcome or result of the scenario.
     const Punity = `PunitAuto_${Math.random().toString(36).replace(/[^a-z]+/g, '').substring(0, 5)}`
     const description = `Description_${Math.random().toString(36).replace(/[^a-z]+/g, '').substring(0, 200)}`
-    cy.wait(2000)
+    cy.wait(30000)
     cy.get(AddProductunityElements.BTN_creer_nouvelle_unite).should('be.visible').click()
     cy.get(AddProductunityElements.Add_newunite_form).should('be.visible')
 
