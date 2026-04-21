@@ -67,6 +67,34 @@ When(`I send a get request to the api endpoint the response should be {int}`, (a
 
 
         cy.log('breeds liste:\n' + names.map(n => `-${n}`).join('\n'));
+        const csvNames = response.body.data.map(b => b.attributes.name.replace(/"/g, '""')) // espace doubles quotes
+        const csv = csvNames.map(n => `"${n}"`).join(',') //mettre chaque nom entre doubles quotes et virgule
+        
+        cy.writeFile('cypress/fixtures/dog-names.csv', csvNames.join('\n'))
+        cy.readFile('cypress/fixtures/dog-names.csv').then(fileContent => {
+            const lines = fileContent.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+            expect(lines).to.have.length(names.length)
+            expect(lines[0]).to.eq(names[0])
+        })
+
+
+         // Prepare array of {name, maxWeight}
+        const breeds = response.body.data.map(b => ({
+            name: b.attributes.name,
+            maxWeight: Math.max(b.attributes.male_weight?.max || 0, b.attributes.female_weight?.max || 0)
+        }))
+         // Sort by name (A-Z)
+        const sortedByName = [...breeds].sort((a, b) => a.name.localeCompare(b.name))
+        // Sort by max weight (desc)
+        const sortedByWeight = [...breeds].sort((a, b) => b.maxWeight - a.maxWeight)
+         // Log both sorts
+        cy.log('Breeds sorted by name (A-Z):\n' + sortedByName.map(b => `- ${b.name}: ${b.maxWeight}kg`).join('\n'))
+        cy.log('Breeds sorted by max weight (desc):\n' + sortedByWeight.map(b => `- ${b.name}: ${b.maxWeight}kg`).join('\n'))
+        
+
+
+
+
 
     })
 

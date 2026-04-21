@@ -1,6 +1,6 @@
 
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
-import AddNewCategoryElements from '../pageObject/addcategorie_Objects'
+import AddNewCategoryElements from '../pageObject/AddnewproductcategoryObjects.js'
 beforeEach(() => {
     cy.intercept('POST', 'https://stocky-backend-dev.uksouth.cloudapp.azure.com/api/v1/Product').as('addnewcategorie')
 })

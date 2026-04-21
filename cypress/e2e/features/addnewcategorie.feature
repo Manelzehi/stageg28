@@ -3,7 +3,7 @@ Feature: Add new product category
     Background:
         Given I am on the Login page
         When I enter valid credentials
-        Then I should be redirected to the dashboard page
+        Then I should be redirected to the dashboard 
     
     Scenario: Add a new product category
         Given I navigate to Product categories page
