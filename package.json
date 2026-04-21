@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "cypress": "^15.9.0",
-    "cypress-cucumber-preprocessor": "^0.0.3"
+    "cypress-cucumber-preprocessor": "^0.0.3",
+    "cypress-mochawesome-reporter": "^4.0.2"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
